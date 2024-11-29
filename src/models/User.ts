@@ -1,5 +1,5 @@
 // Require schema and model from mongoose
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document, ObjectId } from 'mongoose';
 
 interface IUser extends Document {
   username: string;
@@ -15,9 +15,9 @@ const userSchema = new Schema<IUser>({
   email: { type: String, required: true },
   thoughts: [
     {
-        type: Schema.Types.ObjectId, 
-        ref: 'thought',
-    }
+      type: Schema.Types.ObjectId,
+      ref: 'thought',
+    },
   ],
 }, 
 {

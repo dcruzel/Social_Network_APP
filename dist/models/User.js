@@ -9,7 +9,7 @@ const userSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'thought',
-        }
+        },
     ],
 }, {
     toJSON: {
@@ -17,6 +17,6 @@ const userSchema = new Schema({
     },
     id: false,
 });
-// Using model() to compile a model based on the schema 'bookSchema'
+// Using model() to compile a model based on the schema 'userSchema'
 const User = model('user', userSchema);
 export default User;

@@ -1,33 +1,33 @@
 import { Schema, model } from 'mongoose';
-import Reactions from './Reactions.js';
 // Schema to create Post model
 const thoughtSchema = new Schema({
-    thought: {
+    thoughtText: {
         type: String,
-        required: true,
-        minLength: 1,
-        maxLength: 280,
+        minlength: 1,
+        maxlength: 280,
     },
     createdAt: {
         type: Date,
+        timestamps: true,
         default: Date.now,
     },
     username: {
-        type: String
+        type: String,
+        required: true,
     },
-    reactions: [Reactions],
 }, {
     toJSON: {
-        getters: true,
+        virtuals: true,
     },
+    id: false,
 });
-// Create a virtual property `reactions` that gets the amount of reactions associated with an application
-thoughtSchema
-    .virtual('getReactions')
-    // Getter
-    .get(function () {
-    return this.reactions.length;
-});
-// Initialize our Application model
+// Create a virtual property `responses` that gets the amount of response per video
+// thoughtSchema
+//   .virtual('getResponses')
+//   // Getter
+//   .get(function () {
+//     return this.responses.length;
+//   });
+// Initialize our Thought model
 const Thought = model('thought', thoughtSchema);
 export default Thought;

@@ -1,3 +1,7 @@
 import User from './User.js';
+import Thought from './Thought.js';
+export { User, Thought };
 
-export { User };
+// import Response from './Response.js';
+
+// export { User, Video, Response };

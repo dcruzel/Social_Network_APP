@@ -72,3 +72,29 @@ import { Request, Response } from 'express';
     }
   }
 
+   // create a new friend
+   export const addFriend = async (req: Request, res: Response) => {
+    try {
+      const user = await User.create(req.body);
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  }
+
+  // Delete a friend by its _id and associated apps
+  export const deleteFriend = async (req: Request, res: Response) => {
+    try {
+      const user = await User.findOneAndDelete({ _id: req.params.userId });
+
+      if (!user) {
+        return res.status(404).json({ message: 'No user with that ID' });
+      }
+      res.json({ message: 'User deleted!' })
+      return;
+    } catch (err) {
+      res.status(500).json(err);
+      return;
+    }
+  }
+

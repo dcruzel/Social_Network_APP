@@ -29,15 +29,15 @@ const thoughtsBodies = [
   'Fun activities',
 ];
 
-// const possibleReactions = [
-//   'Happy',
-//   'Yay!',
-//   'This was awesome',
-//   'Thankful',
-//   'Sad',
-//   'Oooh',
-//   'Angry',
-// ];
+const possibleReactions = [
+  'Happy',
+  'Yay!',
+  'This was awesome',
+  'Thankful',
+  'Sad',
+  'Oooh',
+  'Angry',
+];
 
 // Get a random item given an array
 const getRandomArrItem = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
@@ -54,27 +54,27 @@ const getRandomThoughts = (int: number) => {
   for (let i = 0; i < int; i++) {
     results.push({
       thoughtText: getRandomArrItem(thoughtsBodies),
-     //reactions: [...getThoughtReactions(3)],
+      username: getRandomUsername(),
+      reactions: [...getThoughtReactions(3)],
     });
   }
   return results;
 };
 
 // Create the reactions that will be added to each thought
-// const getThoughtReactions = (int: number) => {
-//   if (int === 1) {
-//     return getRandomArrItem(possibleReactions);
-//   }
-//   let results = [];
-//   for (let i = 0; i < int; i++) {
-//     results.push({
-//       responseBody: getRandomArrItem(possibleReactions),
-//       username: getRandomUsername(),
-//     });
-//   }
-//   return results;
-// };
+const getThoughtReactions = (int: number) => {
+  if (int === 1) {
+    return getRandomArrItem(possibleReactions);
+  }
+  let results = [];
+  for (let i = 0; i < int; i++) {
+    results.push({
+      reactionBody: getRandomArrItem(possibleReactions),
+      username: getRandomUsername(),
+    });
+  }
+  return results;
+};
 
 // Export the functions for use in seed.js 
-// Add back getVideoResponses to functions in export
-export { getRandomUsername, getRandomEmail, getRandomThoughts };
+export { getRandomUsername, getRandomEmail, getRandomThoughts, getThoughtReactions };

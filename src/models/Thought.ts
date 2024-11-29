@@ -1,11 +1,11 @@
 import { Schema, model} from 'mongoose';
-//import Reaction from './Reaction.js';
+import reactionSchema, {IReaction} from './Reaction.js';
 
 interface IThought {
   thoughtText: string;
   createdAt: Date;
   username: string;
-  //responses: Response[];
+  reactions: IReaction[];
 }
 
 // Schema to create Post model
@@ -25,6 +25,7 @@ const thoughtSchema = new Schema<IThought>(
       type: String,
       required: true, 
     },
+    reactions: [reactionSchema]
   },
   {
     toJSON: {
@@ -34,13 +35,13 @@ const thoughtSchema = new Schema<IThought>(
   }
 );
 
-// Create a virtual property `responses` that gets the amount of response per video
-// thoughtSchema
-//   .virtual('getResponses')
-//   // Getter
-//   .get(function () {
-//     return this.responses.length;
-//   });
+// Create a virtual property `reactions` that gets the amount of response per thought
+thoughtSchema
+  .virtual('getReactions')
+  // Getter
+  .get(function () {
+    return this.reactions.length;
+  });
 
 // Initialize our Thought model
 const Thought = model('thought', thoughtSchema);

@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import reactionSchema from './Reaction.js';
 // Schema to create Post model
 const thoughtSchema = new Schema({
     thoughtText: {
@@ -15,19 +16,20 @@ const thoughtSchema = new Schema({
         type: String,
         required: true,
     },
+    reactions: [reactionSchema]
 }, {
     toJSON: {
         virtuals: true,
     },
     id: false,
 });
-// Create a virtual property `responses` that gets the amount of response per video
-// thoughtSchema
-//   .virtual('getResponses')
-//   // Getter
-//   .get(function () {
-//     return this.responses.length;
-//   });
+// Create a virtual property `reactions` that gets the amount of response per thought
+thoughtSchema
+    .virtual('getReactions')
+    // Getter
+    .get(function () {
+    return this.reactions.length;
+});
 // Initialize our Thought model
 const Thought = model('thought', thoughtSchema);
 export default Thought;

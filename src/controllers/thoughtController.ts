@@ -104,43 +104,43 @@ import { Request, Response } from 'express';
   }
 
   // Add a thought reaction
-  // export const addThoughtReaction = async (req: Request, res: Response) => {
-  //   try {
-  //     const thought = await Thought.findOneAndUpdate(
-  //       { _id: req.params.thoughtId },
-  //       { $addToSet: { responses: req.body } },
-  //       { runValidators: true, new: true }
-  //     );
+  export const addThoughtReaction = async (req: Request, res: Response) => {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: { reactions: req.body } },
+        { runValidators: true, new: true }
+      );
 
-  //     if (!thought) {
-  //       return res.status(404).json({ message: 'No thought with this id!' });
-  //     }
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with this id!' });
+      }
 
-  //     res.json(thought);
-  //     return;
-  //   } catch (err) {
-  //     res.status(500).json(err);
-  //     return;
-  //   }
-  // }
+      res.json(thought);
+      return;
+    } catch (err) {
+      res.status(500).json(err);
+      return;
+    }
+  }
 
   // Remove thought reaction
-  // export const removeThoughtResponse = async (req: Request, res: Response) => {
-  //   try {
-  //     const thought = await Thought.findOneAndUpdate(
-  //       { _id: req.params.thoughtId },
-  //       { $pull: { reactions: { reactionId: req.params.responseId } } },
-  //       { runValidators: true, new: true }
-  //     )
+  export const removeThoughtReaction = async (req: Request, res: Response) => {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { runValidators: true, new: true }
+      )
 
-  //     if (!thought) {
-  //       return res.status(404).json({ message: 'No video with this id!' });
-  //     }
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with this id!' });
+      }
 
-  //     res.json(thought);
-  //     return;
-  //   } catch (err) {
-  //     res.status(500).json(err);
-  //     return;
-  //   }
-  // }
+      res.json(thought);
+      return;
+    } catch (err) {
+      res.status(500).json(err);
+      return;
+    }
+  }

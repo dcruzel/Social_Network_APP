@@ -5,7 +5,7 @@ interface IUser extends Document {
   username: string;
   email: string;
   thoughts?: ObjectId[];
-  friends?: typeof User[];
+  friends?: ObjectId[];
 }
 
 // Construct a new instance of the schema class
@@ -17,6 +17,12 @@ const userSchema = new Schema<IUser>({
     {
       type: Schema.Types.ObjectId,
       ref: 'thought',
+    },
+  ],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
     },
   ],
 }, 

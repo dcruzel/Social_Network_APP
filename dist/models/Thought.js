@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import reactionSchema from './Reaction.js';
+import Reaction from './Reaction.js';
 // Schema to create Post model
 const thoughtSchema = new Schema({
     thoughtText: {
@@ -16,7 +16,7 @@ const thoughtSchema = new Schema({
         type: String,
         required: true,
     },
-    reactions: [reactionSchema]
+    reactions: [Reaction]
 }, {
     toJSON: {
         virtuals: true,

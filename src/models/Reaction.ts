@@ -1,6 +1,6 @@
 import { Schema, Document, ObjectId, Types } from 'mongoose';
 
-export interface IReaction extends Document {
+interface IReaction extends Document {
   reactionId: ObjectId;
   reactionBody: string;
   username: string;

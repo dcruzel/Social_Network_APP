@@ -37,7 +37,9 @@ import { Request, Response } from 'express';
         { $addToSet: { thoughts: thought._id } },
         { new: true }
       );
-  
+      console.log(req.body.userId)
+      console.log(thought._id)
+      console.log(user);
       if (!user) {
         return res.status(404).json({
           message: 'Thought created, but found no user with that ID',

@@ -1,4 +1,4 @@
-import { User } from '../models/index.js';
+import { Thought, User } from '../models/index.js';
 // Get all users
 export const getUsers = async (_req, res) => {
     try {
@@ -49,6 +49,32 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         const user = await User.findOneAndDelete({ _id: req.params.userId });
+        if (!user) {
+            return res.status(404).json({ message: 'No user with that ID' });
+        }
+        await Thought.deleteMany({ _id: { $in: user.thoughts } });
+        res.json({ message: 'User and associated thoughts deleted!' });
+        return;
+    }
+    catch (err) {
+        res.status(500).json(err);
+        return;
+    }
+};
+// create a new friend
+export const addFriend = async (req, res) => {
+    try {
+        const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $addToSet: { friends: req.params.friendId } }, { runValidators: true, new: true });
+        res.json(user);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+};
+// Delete a friend by its _id and associated apps
+export const deleteFriend = async (req, res) => {
+    try {
+        const user = await User.findOneAndDelete({ _id: req.params.userId }, { $pop: { friends: req.params.friendId } });
         if (!user) {
             return res.status(404).json({ message: 'No user with that ID' });
         }

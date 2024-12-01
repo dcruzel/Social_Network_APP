@@ -26,8 +26,8 @@ export const getSingleThought = async (req, res) => {
 export const createThought = async (req, res) => {
     try {
         const thought = await Thought.create(req.body);
-        const user = await User.findOneAndUpdate({ _id: req.body.userId }, { $addToSet: { thoughts: thought._id } }, { new: true });
-        console.log(req.body.userId);
+        const user = await User.findOneAndUpdate({ username: req.body.username }, { $addToSet: { thoughts: thought._id } }, { new: true });
+        console.log(req.body.username);
         console.log(thought._id);
         console.log(user);
         if (!user) {

@@ -74,7 +74,7 @@ export const addFriend = async (req, res) => {
 // Delete a friend by its _id and associated apps
 export const deleteFriend = async (req, res) => {
     try {
-        const user = await User.findOneAndDelete({ _id: req.params.userId }, { $pop: { friends: req.params.friendId } });
+        const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $pull: { friends: req.params.friendId } }, { runValidators: true, new: true });
         if (!user) {
             return res.status(404).json({ message: 'No user with that ID' });
         }

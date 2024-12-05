@@ -42,7 +42,8 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 ## Usage
 - [Github Repo](https://github.com/dcruzel/Social_Network_APP)
-- [Video](https://drive.google.com/file/d/1oQi_i8GJxk9ttiUhAIOAIhpZYlir14G7/view?usp=sharing)
+- [Video](https://drive.google.com/file/d/1M5GpFcCCI9ItRLYUhkrOgnN-A8JSinh7/view?usp=sharing)
+
 
 ## Tests
 - Insomnia was used to test the following API Endpoints
